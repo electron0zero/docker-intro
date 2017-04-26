@@ -1,15 +1,13 @@
 # Docker Intro
-I am following [Docker Get Started](https://docs.docker.com/get-started/)
+This repo have files for [Docker Get Started](https://docs.docker.com/get-started/).
 
-This repo is files and setup of that.
-
-Visit [https://docs.docker.com/get-started/](https://docs.docker.com/get-started/) to get an basic idea if you don't know about docker
+Visit [https://docs.docker.com/get-started/](https://docs.docker.com/get-started/) to get an idea if you don't know about docker
 
 ## Few gotchas/ Things to keep in mind 
 
----
--  On Windows when you use docker using [docker-toolbox](https://www.docker.com/products/docker-toolbox), it runs it on a VirtualBox VM, Which results in ip of VM as address.
--  Use [Kitematic](https://kitematic.com/) to help figure this out
+-  On Windows when you use docker using [docker-toolbox](https://www.docker.com/products/docker-toolbox), it runs it on a VirtualBox VM, Which results in ip of VM as address on which you listen, not on localhost.
+
+-  Use [Kitematic](https://kitematic.com/) to figure out this IP
 
 - If you are deploying real applications from windows,Then do not ignore warnings about permission and **make sure you have some mechanism to set appropriate permissions**
 
@@ -19,8 +17,6 @@ Visit [https://docs.docker.com/get-started/](https://docs.docker.com/get-started
 
 
 ## Basic Commands
-
----
 
 **Command:** `docker version`
 
@@ -46,14 +42,14 @@ Server:
 
 **Explanation:** Self explained imo
 
-
 ---
 
 **Command:** `docker build -t docker-intro .`
 
 **Output:** output of executing Dockerfile and info about image
 
-**Explanation:** Builds image named `docker-intro` from `.` (current dir)(assuming it have a Dockerfile)
+**Explanation:** Builds image named `docker-intro` from `.` (current dir) \
+[*assuming it have a Dockerfile in it**]
 
 ---
 
@@ -76,10 +72,12 @@ python              2.7-slim            4a323b466a5a        3 hours ago         
 ```
  * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
 ```
-*This output is from app, running in container, not local system so will not be available that IP*
-Use [Kitematic](https://kitematic.com/) to help figure real ip for you to access it 
+*This output is from app, running in container.\
+Not local system so will not be available that IP, It will be available on mapped port on VM's IP*
 
-**Explanation:** run docker image `docker-intro` and `-p` flag is used port mapping, here port `4000` of system running docker is mapped to port `80` of container.
+- Use [Kitematic](https://kitematic.com/) to figure out ip on which you can access it.
+
+**Explanation:** run docker image `docker-intro` and `-p` flag is used port mapping, here port `4000` of system running docker(host) is mapped to port `80` of container.
 
 ---
 
@@ -93,9 +91,10 @@ Use [Kitematic](https://kitematic.com/) to help figure real ip for you to access
 **Explanation:** run in detached mode
 
 >if you have issue saying `failed: port is already allocated`.
-> It means you have not container running on that port, you can resolve it by killing/stopping a container
+> It means you have an container running on that port, you can resolve it by killing/stopping that running container or changing it to a free port
 
 *use `docker stop <container-id>`, container id can be found by running `docker ps -a`*
+
 Sample Output of `docker ps -a`
 ```
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                       PORTS                  NAMES
@@ -106,9 +105,8 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 
 ### You can use [Docker Hub](http://hub.docker.com/) to share you images, it is like github for docker images.
-I am not going into this, it is fully described in docker docs
+*I am not going into this, it is fully described in docker docs*
 
 ### Final Thought 
-Docker has more stuff then i described, it is just the gist of it. 
-
+Docker has more stuff then i described, it is just the gist of it. \
 See multi-part [getting-started guide](https://docs.docker.com/get-started/) to learn more
